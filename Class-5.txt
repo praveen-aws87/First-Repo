@@ -1,0 +1,155 @@
+Strings:
+
+Equal.sh
+
+#!/bin/bash
+#Script to check whether two strings are equal.
+
+str1="Welcometo String."
+str2="String"
+
+if [ $str1 = $str2 ];
+then
+echo "Both the strings are equal."
+else
+echo "Strings are not equal."
+fi
+
+lt.sh
+
+#!/bin/sh
+
+str1="Welcome to String"
+str2="String"
+if [ $str1 \< $str2 ];
+then
+    echo "$str1 is less than $str2"
+else
+    echo "$str1 is not less than $str2"
+fi
+
+
+str-relational.sh
+
+a="abcdefg"
+b="abcde"
+
+# Equality Comparison
+if [ "$a" == "$b" ]; then
+    echo "Strings match"
+else
+    echo "Strings don't match"
+fi
+
+# Lexicographic (greater than, less than) comparison.
+if [ "$a" \< "$b" ]; then
+    echo "$a is lexicographically smaller then $b"
+elif [ "$a" \> "$b" ]; then
+    echo "$b is lexicographically smaller than $a"
+else
+    echo "Strings are equal"
+fi
+
+
+str-equal.sh
+
+#!/bin/bash
+
+VAR1="Linuxize"
+VAR2="Linuxize"
+
+if [ "$VAR1" = "$VAR2" ]; then
+    echo "Strings are equal."
+else
+    echo "Strings are not equal."
+fi
+
+
+str1.sh
+
+#!/bin/bash
+
+VAR='GNU/Linux is an operating system'
+if [[ $VAR == *"Unix"* ]]; then
+  echo "It's there."
+else
+  echo "It's not there"
+fi
+
+
+strlen.sh
+
+#!/bin/bash
+#Bash program to find the length of a string
+
+str="Welcome to String"
+length=${#str}
+echo "Length of '$str' is $length"
+
+length1=`expr length "$str"`
+echo "Length1 of '$str' is $length1"
+
+length2=`expr "$str" : '.*'`
+echo "Length2 of '$str' is $length"
+
+length3=`echo $str | wc -c`
+echo "Length3 of '$str' is $length"
+
+length4=`echo $str |awk '{print length}'`
+echo "Length4 of '$str' is $length"
+
+substr.sh
+
+#!/bin/bash
+#Script to extract first 10 characters of a string
+echo "String: We welcome you on String Basics."
+str="We welcome you on String."
+echo "Total characters in a String: ${#str} "
+substr="${str:0:10}"
+echo "Substring: $substr"
+echo "Total characters in Substring: ${#substr} "
+
+
+
+strcat.sh
+
+#!/bin/bash
+#Script to Concatenate Strings
+#Declaring the first String
+str1="We welcome you"
+#Declaring the Second String
+str2=" on String Basics."
+#Combining first and second string
+str3="$str1$str2"
+#Printing a new string by combining both
+echo $str3
+str4="this is concat demo"
+str5="$str3$str4"
+echo $str5
+
+non-empty.sh
+
+#!/bin/sh
+
+str="WelcometoJavatpoint"
+
+if [ -n $str ];
+then
+    echo "String is not empty"
+else
+    echo "String is empty"
+fi
+
+
+empty.sh
+
+#!/bin/sh
+
+str=""
+
+if [ -z $str ];
+then
+    echo "String is empty."
+else
+    echo "String is non-empty."
+fi

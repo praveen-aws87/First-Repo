@@ -1,0 +1,130 @@
+Associative Array:
+Example-1:
+
+2  declare -A Player_Country=([India]="Rohit" [Pak]="Babar" [Aus]="Cummins")
+    
+    
+    5  echo ${Player_Country[@]}
+    6  echo ${Player_Country[*]}
+    7  echo ${Player_Country}
+    8  echo ${Player_Country[India]}
+    9  echo ${Player_Country[Pak]}
+   10  echo ${Player_Country[Aus]}
+   11  Player_Country[Eng]="Buttler"
+   12  echo ${Player_Country[@]}
+   13  echo ${Player_Country[Eng]}
+   
+   
+   16  echo ${Player_Country[@]}
+   
+   18  Player_Country+=([SL]="Hasaranga")
+   19  echo ${Player_Country[@]}
+   20  clear
+   21  echo ${Player_Country[@]}
+   22  Player_Country+=([Ban]="Shakib" [WI]="Gayle")
+   23  echo ${Player_Country[@]}
+   24  for elem in "${!Player_Country[@]}";  do  echo "key : ${elem}" -- "value: ${Player_Country[${elem}]}";  done
+
+Example-2:
+
+   28  declare -A Country_Capital=([India]="Delhi" [SL]="Colombo" [Aus]="sydney")
+   29  echo ${Country_Capital[@]}
+   30  echo ${Country_Capital[*]}
+   31  echo ${Country_Capital}
+   32  echo ${Country_Capital[@]}
+   27  Country_Capital[Pak]="Islamabad"
+   28  echo ${Country_Capital[*]}
+   29  Country_Capital+=([USA]="Newyork")
+   30  echo ${Country_Capital[*]}
+   31  Country_Capital+=([UK]="London" [SA]="Capetown")
+   32  echo ${Country_Capital[*]}
+   33  for elem in "${!Country_Capital[@]}";  do  echo "key : ${elem}" -- "value: ${Country_Capital[${elem}]}";  done
+   48  for key in "${!Country_Capital[@]}"; do echo $key; done
+   50  for val in "${Country_Capital[@]}"; do echo $val; done
+   51  for key in "${!Country_Capital[@]}"; do echo "$key => ${Country_Capital[$key]}"; done
+
+
+Example-3:
+
+   38  declare -A assArray1=([flower]="Rose" [bird]="crow" [fruit]="mango")
+   39  echo ${assArray1[flower]}
+   40  echo ${assArray1[bird]}
+   40  echo ${assArray1[fruit]}
+   41  for key in "${!assArray1[@]}"; do echo $key; done
+   42  echo "${!assArray1[@]}"
+   43  for val in "${assArray1[@]}"; do echo $val; done
+   44  for key in "${!assArray1[@]}"; do echo "$key => ${assArray1[$key]}"; done
+
+
+
+
+
+Indexed Arrays:
+
+Reorder.sh
+
+#!/bin/bash
+items=("Mango" "Pineapple" "Strawberry" "Cherry" "Grapes")
+order=(4 2 0 3 1)
+for i in "${order[@]}"
+do
+     echo ${items[$i]}
+done
+
+Filter.sh
+
+#!/bin/bash
+items=("Mango" "Pineapple" "Strawberry" "Cherry" "Grapes")
+indices=()
+
+for i in "${!items[@]}"
+do
+   if [[ ${items[$i]} == *"y"* ]]
+   then
+      indices+=($i)
+   fi
+done
+
+for i in "${indices[@]}"
+do
+   echo ${items[$i]}
+done
+
+
+
+count.sh
+
+#!/bin/bash
+items=("Mango" "Pineapple" "Strawberry" "Cherry" "Grapes" "Mango")
+counts=()
+
+for i in "${!items[@]}"
+do
+   if [[ ! "${counts[@]}" =~ "${items[$i]}" ]]
+   then
+      counts+=("${items[$i]} 1")
+   else
+      index=$(echo "${counts[@]}" | tr ' ' '\n' | grep -n "^${items[$i]}" | cu)
+      count=$(echo "${counts[$index-1]}" | cut -d' ' -f2)
+      counts[$index-1]="${items[$i]} $((count+1))"
+   fi
+done
+
+for count in "${counts[@]}"
+do
+   echo $count
+done
+
+
+vi update.sh
+
+#!/bin/bash
+items=("Mango" "Pineapple" "Strawberry" "Cherry" "Grapes")
+
+# Adding a new element to the indexed array at index 2
+items[6]="orange"
+# Deleting the element at index 2 from the indexed array
+unset items[2]
+
+# Printing the updated array
+echo "${items[@]}"
